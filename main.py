@@ -5,7 +5,9 @@ from game import *
 
 game = Game()
 player = Player(game)
+
 ground = Object(game, 0, 400, 15)
+platform = Object(game, 300, 300, 1)
 
 
  
@@ -22,13 +24,13 @@ while game.running == True: #update loop
                 if event.button == 1:
                     if game.selected_option is not None:
                         if game.selected_option == 0:
-                            game.menu = False  # Start slot machine
+                            game.menu = False #start game
                         elif game.selected_option == 1:
-                            pass  # Start Blackjack
+                            pass
                         elif game.selected_option == 2:
-                            pass#start settings  
+                            pass
                         elif game.selected_option == 3:
-                            game.running = False
+                            game.running = False #exit game
     else:
 
         game.window.fill((0, 0, 0))
@@ -40,6 +42,7 @@ while game.running == True: #update loop
             player.keybinds(event) #keybinds updater
 
         player.collision(ground)
+        player.collision(platform) 
         player.update()
 
         for d in game.dust:
@@ -47,6 +50,7 @@ while game.running == True: #update loop
             d.update()
         
         ground.draw()
+        platform.draw()
                  
     pygame.display.flip()
     pygame.display.update()

@@ -12,9 +12,9 @@ class Game:
         self.dust = []
         self.menu = True
         self.font = pygame.font.Font("assets/pixel_font.TTF", 65)
-        self.M_font = pygame.font.Font("assets/pixel_font.TTF", 125)
-        self.menu_options = ["Start", "test", "test", "Quit"]
-        self.M_menu_text = ("velocitiles")
+        self.M_font = pygame.font.Font("assets/pixel_font.TTF", 70)
+        self.menu_options = ["Start", "Settings", "test", "Quit"]
+        self.M_menu_text = ("rush to the toilet")
         self.menu_title = self.M_font.render(self.M_menu_text, True, (255, 255, 255))
         self.menu_texts = [self.font.render(option, True, (255, 255, 255)) for option in self.menu_options]
         self.menu_rects = [text.get_rect(center=(self.windowWidth // 2, self.windowHeight // 2 + i * 85)) for i, text in enumerate(self.menu_texts)]

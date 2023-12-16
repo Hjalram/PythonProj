@@ -1,6 +1,5 @@
 import pygame
-from sfx import *
-
+from sfx import Dust
 
 class Player:
     def __init__(self, game): 
@@ -19,13 +18,19 @@ class Player:
         self.game = game
     
     def draw(self):
-        pygame.draw.rect(self.game.window, (200, 255, 0), pygame.Rect(self.x, self.y, self.width, self.height))
+        self.character_image = pygame.transform.scale(pygame.image.load("assets/Character.png"), (38, 38))
+        self.game.window.blit(self.character_image, (self.x, self.y))
 
-    def collision(self, obj): #pass in static object 
-        if self.x + self.width > obj.x and self.x < obj.x + obj.width and self.y + self.height > obj.y and self.y < obj.y + obj.height: #collision self.x
+    def collision(self, obj):  # pass in static object 
+        if (
+            self.x + self.width > obj.x
+            and self.x < obj.x + obj.width
+            and self.y + self.height > obj.y
+            and self.y < obj.y + obj.height
+        ):  # collision self.x
             self.grounded = True
                             
-            if self.xVel > self.maxSpeed: #max speed cap
+            if self.xVel > self.maxSpeed:  # max speed cap
                 self.xVel = self.maxSpeed
             if self.xVel < -self.maxSpeed:
                 self.xVel = -self.maxSpeed
@@ -44,7 +49,7 @@ class Player:
         else:
             self.grounded = False
 
-    def  keybinds(self, event): #for player movement
+    def keybinds(self, event):  # for player movement
         if event.type == pygame.KEYDOWN:
             if event.key == ord('a'):
                 self.left = True
@@ -66,28 +71,27 @@ class Player:
             if event.key == pygame.K_SPACE:
                 self.up = False
 
-    
-    def update(self): #Player update loop
+    def update(self):  # Player update loop
         self.x += self.xVel
         self.y += self.yVel
 
         self.yVel += self.gravity
 
-        if self.x >= self.game.windowWidth: #reset position when finished stage
+        if self.x >= self.game.windowWidth:  # reset position when finished stage
             self.x = 0
-        
-        #movement
-        if self.left == True and self.xVel >= 0: #base jumping speed
+
+        # movement
+        if self.left == True and self.xVel >= 0:  # base jumping speed
             self.xVel = -5
         if self.right == True and self.xVel <= 0:
             self.xVel = 5
-            
-        if self.left == True: #increase speed
+
+        if self.left == True:  # increase speed
             self.xVel -= 0.085
         if self.right == True:
             self.xVel += 0.085
 
-        if self.left == False and self.right == False and self.xVel > 0: #friction
+        if self.left == False and self.right == False and self.xVel > 0:  # friction
             self.xVel -= 0.715
         if self.left == False and self.right == False and self.xVel < 0:
             self.xVel += 0.888
@@ -96,7 +100,7 @@ class Player:
             if self.xVel > -2 and self.xVel < 2:
                 self.xVel = 0
 
-       # Create dust when moving
+        # Create dust when moving
         if self.xVel < 0 and self.yVel != 0:
             d = Dust(self.game, (self.x + 40, self.y))
             self.game.dust.append(d)
@@ -104,5 +108,6 @@ class Player:
         if self.xVel > 0 and self.yVel != 0:
             d = Dust(self.game, (self.x, self.y))
             self.game.dust.append(d)
+
 
         self.draw()
