@@ -1,4 +1,6 @@
 import pygame
+from sfx import *
+
 
 class Player:
     def __init__(self, game): 
@@ -93,5 +95,14 @@ class Player:
         if self.left == False and self.right == False:
             if self.xVel > -2 and self.xVel < 2:
                 self.xVel = 0
+
+       # Create dust when moving
+        if self.xVel < 0 and self.yVel != 0:
+            d = Dust(self.game, (self.x + 40, self.y))
+            self.game.dust.append(d)
+
+        if self.xVel > 0 and self.yVel != 0:
+            d = Dust(self.game, (self.x, self.y))
+            self.game.dust.append(d)
 
         self.draw()

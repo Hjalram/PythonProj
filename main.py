@@ -6,7 +6,7 @@ from game import *
 game = Game()
 player = Player(game)
 ground = Object(game, 0, 400, 15)
-
+ 
 while game.running == True: #update loop
     game.window.fill((0, 0, 0))
            
@@ -18,6 +18,10 @@ while game.running == True: #update loop
 
     player.collision(ground)
     player.update()
+
+    for d in game.dust:
+        d.draw()
+        d.update()
     
     ground.draw()
                  
