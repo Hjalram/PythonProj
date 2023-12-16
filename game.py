@@ -8,5 +8,23 @@ class Game:
         self.windowHeight = 1080/1.5
         self.running = True
         self.window = pygame.display.set_mode((self.windowWidth, self.windowHeight)) 
-        self.clock = pygame.time.Clock()     #cum tastes very good
+        self.clock = pygame.time.Clock()
         self.dust = []
+        self.menu = True
+        self.font = pygame.font.Font("assets/pixel_font.TTF", 65)
+        self.M_font = pygame.font.Font("assets/pixel_font.TTF", 125)
+        self.menu_options = ["Start", "test", "test", "Quit"]
+        self.M_menu_text = ("velocitiles")
+        self.menu_title = self.M_font.render(self.M_menu_text, True, (255, 255, 255))
+        self.menu_texts = [self.font.render(option, True, (255, 255, 255)) for option in self.menu_options]
+        self.menu_rects = [text.get_rect(center=(self.windowWidth // 2, self.windowHeight // 2 + i * 85)) for i, text in enumerate(self.menu_texts)]
+        
+
+    def hoverCheck(self):
+        # Check for mouse hover over menu options
+        mouse_pos = pygame.mouse.get_pos()
+        for i, rect in enumerate(self.menu_rects):
+            if rect.collidepoint(mouse_pos):
+                self.selected_option = i
+                pygame.draw.rect(self.window, (0, 0, 0), self.menu_rects[i])  # Highlight the selected option
+            self.window.blit(self.menu_texts[i], self.menu_rects[i].topleft)
