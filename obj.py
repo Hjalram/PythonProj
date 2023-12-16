@@ -16,6 +16,6 @@ class Object:
 
     def draw(self):
         for i in range(0, self.tiles):
-            grass = pygame.transform.scale(pygame.image.load("C:/coding/vscode/codededeing/textures/grass_ground.png"), (self.textureWidth, self.textureHeight))
+            grass = pygame.transform.scale(pygame.image.load("./assets/grass_ground.png"), (self.textureWidth, self.textureHeight))
 
             self.game.window.blit(grass, (self.x + (i * self.textureWidth), self.y))
