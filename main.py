@@ -9,7 +9,7 @@ ground = Object(game, 0, 400, 15)
 
 while game.running == True: #update loop
     game.window.fill((0, 0, 0))
-    
+           
     for event in pygame.event.get(): #pygame events
         if event.type == pygame.QUIT:
             game.running = False
