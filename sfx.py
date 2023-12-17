@@ -3,7 +3,7 @@ import pygame, random
 class Particle:
     def __init__(self, game, pos):
         self.x, self.y = pos
-        self.vx, self.vy = random.randint(-2, 2), random.randint(-100, -10) * 0.1
+        self.vx, self.vy = random.randint(-2, 2), random.randint(-50, -10) * 0.1
         self.rad = 5
         self.game = game
 
@@ -13,7 +13,7 @@ class Particle:
     def update(self):
         self.x += self.vx
         self.y += self.vy
-        if random.randint(0, 80) < 60:
+        if random.randint(0, 60) < 60:
             self.rad -= 1
 
 class Dust:
