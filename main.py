@@ -5,18 +5,14 @@ from game import *
 
 game = Game()
 player = Player(game)
-
 ground = Object(game, 0, 400, 15)
 platform = Object(game, 300, 300, 1)
 
-
- 
 while game.running == True: #update loop
     if game.menu == True:
         game.window.fill((100, 100, 100))
         menu_background = pygame.transform.scale(pygame.image.load("assets/menu_test.png"), (1280, 720))
         game.window.blit(menu_background, (0, 0))
-
 
 
         game.hoverCheck()
@@ -36,7 +32,7 @@ while game.running == True: #update loop
                             game.running = False #exit game
     else:
 
-        game.window.fill((0, 0, 0))
+        game.window.fill((130, 130, 130))
             
         for event in pygame.event.get(): #pygame events
             if event.type == pygame.QUIT:

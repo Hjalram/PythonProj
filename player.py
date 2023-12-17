@@ -19,7 +19,7 @@ class Player:
         self.flipped = False
     
     def draw(self):
-        self.character_image = pygame.transform.scale(pygame.image.load("assets/Character.png"), (38, 38))
+        self.character_image = pygame.transform.scale(pygame.image.load("assets/Character.png"), (40, 40))
 
         if self.xVel > 0:
             self.character_image = pygame.transform.flip(self.character_image, False, False)
