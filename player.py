@@ -16,9 +16,24 @@ class Player:
         self.maxSpeed = 20
         self.grounded = False
         self.game = game
+        self.flipped = False
     
     def draw(self):
         self.character_image = pygame.transform.scale(pygame.image.load("assets/Character.png"), (38, 38))
+
+        if self.xVel > 0:
+            self.character_image = pygame.transform.flip(self.character_image, False, False)
+            self.flipped = False
+        if self.xVel < 0:
+            self.character_image = pygame.transform.flip(self.character_image, True, False)
+            self.flipped = True
+        
+        if self.xVel == 0:
+            if self.flipped == True:
+                self.character_image = pygame.transform.flip(self.character_image, True, False)
+            else:
+                self.character_image = pygame.transform.flip(self.character_image, False, False)
+
         self.game.window.blit(self.character_image, (self.x, self.y))
 
     def collision(self, obj):  # pass in static object 
