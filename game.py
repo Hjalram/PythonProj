@@ -8,6 +8,7 @@ class Game:
         self.windowHeight = 1080/1.5
         self.running = True
         self.window = pygame.display.set_mode((self.windowWidth, self.windowHeight)) 
+        self.caption = pygame.display.set_caption("rush to the toilet")
         self.clock = pygame.time.Clock()
         self.dust = []
         self.menu = True
