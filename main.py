@@ -5,12 +5,9 @@ from game import *
 
 game = Game()
 player = Player(game)
-
 ground = Object(game, 0, 400, 15)
 platform = Object(game, 300, 300, 1)
 
-
- 
 while game.running == True: #update loop
     if game.menu == True:
         game.window.fill((100, 100, 100))
