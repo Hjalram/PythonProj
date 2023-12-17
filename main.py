@@ -30,7 +30,7 @@ while game.running == True: #update loop
                             game.running = False #exit game
     else:
 
-        game.window.fill((0, 0, 0))
+        game.window.fill((130, 130, 130))
             
         for event in pygame.event.get(): #pygame events
             if event.type == pygame.QUIT:
