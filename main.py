@@ -14,6 +14,9 @@ platform = Object(game, 300, 300, 1)
 while game.running == True: #update loop
     if game.menu == True:
         game.window.fill((100, 100, 100))
+        menu_background = pygame.transform.scale(pygame.image.load("assets/menu_test.png"), (1280, 720))
+        game.window.blit(menu_background, (0, 0))
+
 
 
         game.hoverCheck()
