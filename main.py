@@ -43,6 +43,7 @@ while game.running == True: #update loop
         player.collision(ground)
         player.collision(platform) 
         player.update()
+        
 
         for d in game.dust:
             d.draw()
