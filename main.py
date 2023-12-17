@@ -12,7 +12,6 @@ while game.running == True: #update loop
     if game.menu == True:
         game.window.fill((100, 100, 100))
 
-
         game.hoverCheck()
         game.window.blit(game.menu_title, (game.windowWidth // 6 - 80, 100))
 
