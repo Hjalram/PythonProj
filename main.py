@@ -3,6 +3,9 @@ from player import *
 from obj import *
 from game import *
 
+game_background = pygame.transform.scale(pygame.image.load("assets/game_background.png"), (1280, 720))
+
+
 game = Game()
 player = Player(game)
 ground = Object(game, 0, 400, 15)
@@ -33,7 +36,8 @@ while game.running == True: #update loop
     else:
 
         game.window.fill((130, 130, 130))
-            
+        game.window.blit(game_background, (0, 0))
+
         for event in pygame.event.get(): #pygame events
             if event.type == pygame.QUIT:
                 game.running = False
