@@ -35,25 +35,50 @@ class Player:
                 self.character_image = pygame.transform.flip(self.character_image, False, False)
 
         self.game.window.blit(self.character_image, (self.x, self.y))
+    
+    def normalizeVectorX(self, a, b):
+        hyp = (a*a + b*b)**0.5
 
-    def collision(self, obj):  # pass in static object 
+        nx = a / hyp
+
+        return nx
+    
+    def normalizeVectorY(self, a, b):
+        hyp = (a*a + b*b)**0.5
+
+        ny = b / hyp
+
+        return ny
+
+    def collision(self, obj):  # pass in static object
         if (
             self.x + self.width > obj.x
             and self.x < obj.x + obj.width
             and self.y + self.height > obj.y
             and self.y < obj.y + obj.height
         ):  # collision self.x
-            self.grounded = True
+            
                             
             if self.xVel > self.maxSpeed:  # max speed cap
                 self.xVel = self.maxSpeed
             if self.xVel < -self.maxSpeed:
                 self.xVel = -self.maxSpeed
-            
-            self.y = obj.y - (self.height - 1)
+
+            if self.yVel < 0:
+                self.y = obj.y + obj.height
+                
+            else:
+                self.y = obj.y - (self.height - 1)
+                self.grounded = True
+
+            dirX = self.normalizeVectorX(self.xVel, self.yVel) * -1
+            dirY = self.normalizeVectorY(self.xVel, self.yVel) * -1
+            prevX = self.x - self.xVel
+            prevY = self.y - self.yVel
+
             self.yVel = 0
 
-            if self.up == True:
+            if self.up == True and self.grounded == True:
                 self.grounded = False
                 self.yVel = -14
 
