@@ -16,7 +16,7 @@ while game.running == True: #update loop
 
 
         game.hoverCheck()
-        game.window.blit(game.menu_title, (game.windowWidth // 6 - 80, 100))
+        game.window.blit(game.menu_title, (game.windowWidth // 6, 100))
 
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
