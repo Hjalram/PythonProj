@@ -20,6 +20,7 @@ class Game:
         self.menu_texts = [self.font.render(option, True, (255, 255, 255)) for option in self.menu_options]
         self.menu_rects = [text.get_rect(center=(self.windowWidth // 2, self.windowHeight // 2 + i * 85)) for i, text in enumerate(self.menu_texts)]
         self.targetFPS = 60
+        self.selected_option = None
         
 
     def hoverCheck(self):
