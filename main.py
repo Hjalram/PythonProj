@@ -32,11 +32,7 @@ while game.running == True: #update loop
                         elif game.selected_option == 2:
                             pass
                         elif game.selected_option == 3:
-                            game.running = False #exit game
-
-
-                        
-                        
+                            game.running = False #exit game              
     else:
 
         game.window.fill((130, 130, 130))
@@ -59,10 +55,16 @@ while game.running == True: #update loop
         
         ground.draw()
         platform.draw()
+    
+    fps_text = game.fps_font.render("fps: " + str(int(game.clock.get_fps())), 1, (255, 255, 255))
+    target_text = game.fps_font.render("target fps: " + str(game.targetFPS), 1, (255, 255, 255))
+
+    game.window.blit(fps_text, (10, 10))
+    game.window.blit(target_text, (10, 30))
                  
     pygame.display.flip()
     pygame.display.update()
 
-    game.clock.tick(60)
+    game.clock.tick(game.targetFPS)
 
 pygame.quit()
