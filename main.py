@@ -33,6 +33,10 @@ while game.running == True: #update loop
                             pass
                         elif game.selected_option == 3:
                             game.running = False #exit game
+
+
+                        
+                        
     else:
 
         game.window.fill((130, 130, 130))
