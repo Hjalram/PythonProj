@@ -5,6 +5,10 @@ from game import *
 
 game_background = pygame.transform.scale(pygame.image.load("assets/game_background.png"), (1280, 720))
 
+dark = pygame.Surface((game_background.get_width(), game_background.get_height()), flags=pygame.SRCALPHA)
+dark.fill((60, 60, 60, 0))
+game_background.blit(dark, (0, 0), special_flags=pygame.BLEND_RGBA_SUB)
+#darken background
 
 game = Game()
 player = Player(game)
@@ -33,10 +37,8 @@ while game.running == True: #update loop
                             pass
                         elif game.selected_option == 3:
                             game.running = False #exit game
-
-
-                        
-                        
+                    else:
+                        pass
     else:
 
         game.window.fill((130, 130, 130))
@@ -66,3 +68,4 @@ while game.running == True: #update loop
     game.clock.tick(60)
 
 pygame.quit()
+
