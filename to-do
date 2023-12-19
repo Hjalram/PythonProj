@@ -16,4 +16,4 @@
 
 #make settings menu
 
-#crashing when pressing before selecting in menu (bug)
+#low framerate (python is slow)
