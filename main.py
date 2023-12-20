@@ -68,4 +68,3 @@ while game.running == True: #update loop
     game.clock.tick(60)
 
 pygame.quit()
-

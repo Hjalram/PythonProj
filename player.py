@@ -1,4 +1,5 @@
 import pygame
+import time
 from sfx import Dust
 
 class Player:
@@ -17,6 +18,11 @@ class Player:
         self.grounded = False
         self.game = game
         self.flipped = False
+        self.dashing = False
+        self.dash_cooldown = 2
+        self.last_dash_time = time.time()
+        self.decrease_speed_rate = 2  # Rate at which maxSpeed decreases per second
+        self.last_speed_decrease_time = time.time()
     
     def draw(self):
         self.character_image = pygame.transform.scale(pygame.image.load("assets/Character.png"), (40, 40))
@@ -102,6 +108,19 @@ class Player:
                 self.y = 300
                 self.xVel = 0
                 self.yVel = 0
+            if event.key == pygame.K_LSHIFT:
+                current_time = time.time()
+                if current_time - self.last_dash_time > self.dash_cooldown:
+                    # Check if enough time has passed since the last dash
+                    self.start_time = current_time
+                    self.last_dash_time = current_time  # Update the last dash time
+                    self.dashing = True
+                    if self.right == True:
+                        self.xVel += 10
+                        self.maxSpeed = 30
+                    elif self.left == True:
+                        self.xVel -= 10
+                        self.maxSpeed = 30
 
         if event.type == pygame.KEYUP:
             if event.key == ord('a'):
@@ -148,6 +167,24 @@ class Player:
         if self.xVel > 0 and self.yVel != 0:
             d = Dust(self.game, (self.x, self.y))
             self.game.dust.append(d)
+        
+        if self.dashing:
+            self.dash()
+            self.dashing = False
 
-
+        # Decrease maxSpeed gradually
+        current_time = time.time()
+        if current_time - self.last_speed_decrease_time > 0.25:
+            self.last_speed_decrease_time = current_time
+            if self.maxSpeed > 20:
+                self.maxSpeed -= self.decrease_speed_rate
+                if self.maxSpeed <= 20:
+                    self.maxSpeed = 20
+    
         self.draw()
+    
+    def dash(self):
+        # Perform the dash logic
+        d = Dust(self.game, (self.x + 40, self.y - 30))
+        self.game.dust.append(d)
+
